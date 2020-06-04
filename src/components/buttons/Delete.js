@@ -3,11 +3,9 @@ import React from "react";
 // Styling
 import { DeleteButton } from "../../styles";
 
-const Delete = (props) => {
+const Delete = ({ cookieId, deleteCookie }) => {
   return (
-    <DeleteButton
-      onClick={(event) => props.deleteCookie(event, props.cookieId)}
-    >
+    <DeleteButton onClick={(event) => deleteCookie(event, cookieId)}>
       Delete
     </DeleteButton>
   );

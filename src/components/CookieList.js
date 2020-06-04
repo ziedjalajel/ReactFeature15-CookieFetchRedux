@@ -7,17 +7,13 @@ import SearchBar from "./SearchBar";
 // Styling
 import { ListWrapper } from "../styles";
 
-const CookieList = (props) => {
+const CookieList = ({ cookies, deleteCookie }) => {
   const [query, setQuery] = useState("");
 
-  const cookieList = props.cookies
+  const cookieList = cookies
     .filter((cookie) => cookie.name.toLowerCase().includes(query.toLowerCase()))
     .map((cookie) => (
-      <CookieItem
-        cookie={cookie}
-        key={cookie.id}
-        deleteCookie={props.deleteCookie}
-      />
+      <CookieItem cookie={cookie} key={cookie.id} deleteCookie={deleteCookie} />
     ));
 
   return (

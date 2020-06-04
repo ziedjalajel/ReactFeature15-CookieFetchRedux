@@ -7,16 +7,16 @@ import Delete from "./buttons/Delete";
 // Styling
 import { DetailWrapper } from "../styles";
 
-const CookieDetail = (props) => {
+const CookieDetail = ({ cookies, deleteCookie }) => {
   const { cookieId } = useParams();
-  const cookie = props.cookies.find((cookie) => cookie.id === +cookieId);
+  const cookie = cookies.find((cookie) => cookie.id === +cookieId);
   return (
     <DetailWrapper>
       <h1>{cookie.name}</h1>
       <img src={cookie.image} alt={cookie.name} />
       <p>{cookie.description}</p>
       <p>{cookie.price} KD</p>
-      <Delete cookieId={cookie.id} deleteCookie={props.deleteCookie} />
+      <Delete cookieId={cookie.id} deleteCookie={deleteCookie} />
     </DetailWrapper>
   );
 };
