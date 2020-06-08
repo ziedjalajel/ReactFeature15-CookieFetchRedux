@@ -128,28 +128,7 @@ return (
 
 11. Let's try out our modal. Yay It's working!
 
-12. One last thing, `Modal` requires a `style` object called `customStyles`, we'll move it to `styles`. rename it to `modalStyle`.
-
-```javascript
-export const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    transform: "translate(-50%, -50%)",
-    width: "40%",
-  },
-};
-```
-
-13. Let's import it in `CookieModal`:
-
-```javascript
-import { CreateButton, modalStyle } from "../../styles";
-```
-
-14. Now we'll pass it to `Modal`:
+12. Now we'll pass it to `Modal`:
 
 ```jsx
 <Modal
@@ -162,7 +141,7 @@ import { CreateButton, modalStyle } from "../../styles";
 </Modal>
 ```
 
-15. Our modal is ready! Let's add a form to it!
+13. Our modal is ready! Let's add a form to it!
 
 ## Step 3: Set Form
 
@@ -237,56 +216,60 @@ To create a cookie form we need 4 fields, `name`, `description`, `price` and `im
 
 5. Our form is ready!
 
-6. So now we need to capture the user's input and save it. So we will create a state for each one of our fields.
+6. So now we need to capture the user's input and save it. So we will create an object state that has a property for every field.
 
 ```javascript
-const [name, setName] = useState("");
-const [price, setPrice] = useState(0);
-const [description, setDescription] = useState("");
-const [image, setImage] = useState("");
+const [cookie, setCookie] = useState({
+  name: "",
+  price: 0,
+  description: "",
+  image: "",
+});
 ```
 
-7. Let's link our states to our `input` fields:
-
-```jsx
-<input
-  type="text"
-  className="form-control"
-  onChange={(event) => setName(event.target.value)}
-/>
-```
-
-```jsx
-<input
-  type="number"
-  min="1"
-  className="form-control"
-  onChange={(event) => setPrice(event.target.value)}
-/>
-```
-
-```jsx
-<input
-  type="text"
-  className="form-control"
-  onChange={(event) => setDescription(event.target.value)}
-/>
-```
-
-```jsx
-<input
-  type="text"
-  className="form-control"
-  onChange={(event) => setImage(event.target.value)}
-/>
-```
-
-8. So now whenever the user types in anything, it's being saved into our component's state.
-
-9. Let's add a `Create` button. In `styles`:
+7. Create a function that will handle the change in the `name` field. Basically we will de-structure our `cookie` object and overwrite the `name` field:
 
 ```javascript
-export const CreateButton = styled.button`
+const handleChange = (event) => {
+  setCookie({ ...cookie, name: event.target.value });
+};
+```
+
+8. Pass the function to the `name`'s input field:
+
+```jsx
+<input type="text" className="form-control" onChange={handleChange} />
+```
+
+8. But are we gonna do this for all our input fields? There is an easier way, first we will add give a `name` to every `input` tag. Take care that the name must be the same as the key in the `cookie` state:
+
+```jsx
+<input
+  type="text"
+  className="form-control"
+  name="name"
+  onChange={handleChange}
+/>
+```
+
+```jsx
+<input type="text" className="form-control" name="description" />
+```
+
+9. In `handleChange`, instead of adding an if-condition that checks the name of the input field, we will make our key dynamic:
+
+```javascript
+const handleChange = (event) => {
+  setCookie({ ...cookie, [event.target.name]: event.target.value });
+};
+```
+
+10. So now whenever the user types in anything in any field, it's being saved into our component's state.
+
+11. Let's add a `Create` button. In `styles`:
+
+```javascript
+export const CreateButtonStyled = styled.button`
   color: ${(props) => props.theme.backgroundColor};
   background-color: ${(props) => props.theme.mainColor};
 
@@ -297,65 +280,39 @@ export const CreateButton = styled.button`
 `;
 ```
 
-10. Import `CreateButton` in `CookieModal`, and place it at the end of the form.
+12. Import `CreateButtonStyled` in `CookieModal`, and place it at the end of the form.
 
 ```jsx
-<CreateButton className="btn float-right">Create</CreateButton>
+<CreateButtonStyled className="btn float-right">Create</CreateButtonStyled>
 </form>
 ```
 
-11. Now let's create our function that will put our states together into an object. And later we will pass this object to `cookies`. For now let's just console.log it:
+13. Now let's create our function that will pass this object to `cookies`. For now let's just console.log it:
 
 ```javascript
 const handleSubmit = () => {
-  const newCookie = {
-    name: name,
-    price: price,
-    description: description,
-    image: image,
-  };
-  console.log("handleSubmit -> newCookie", newCookie);
+  console.log(cookie);
 };
 ```
 
-12. But we can clean this up a bit. In Javascript, if you're passing a variable to a key and they have the same name we can do the following:
+14. We will use a new event called `onSubmit`. `onSubmit` can be triggered when we click on our button, or when we even just press on the enter key!
 
-```javascript
-const handleSubmit = () => {
-  const newCookie = {
-    name,
-    price,
-    description,
-    image,
-  };
-  console.log("handleSubmit -> newCookie", newCookie);
-};
-```
-
-13. We will use a new event called `onSubmit`. `onSubmit` can be triggered when we click on our button, or when we even just press on the enter key!
-
-14. The `onSubmit` method is added to the `form` tag.
+15. The `onSubmit` method is added to the `form` tag.
 
 ```jsx
  <form onSubmit={handleSubmit}>
 ```
 
-15. Let's try submitting it. Oops, the page is being refreshed. That's because `onSubmit`'s default behavior is refreshing the page. We can easily prevent that by using the `preventDefault` method:
+16. Let's try submitting it. Oops, the page is being refreshed. That's because `onSubmit`'s default behavior is refreshing the page. We can easily prevent that by using the `preventDefault` method:
 
 ```javascript
 const handleSubmit = (event) => {
   event.preventDefault();
-  const newCookie = {
-    name,
-    price,
-    description,
-    image,
-  };
-  console.log("handleSubmit -> newCookie", newCookie);
+  console.log(cookie);
 };
 ```
 
-16. Let's try again. Yaay it's working!
+17. Let's try again. Yaay it's working!
 
 ## Step 4: Creating a New Cookie
 
@@ -424,13 +381,13 @@ const handleSubmit = (event) => {
 };
 ```
 
-8. Let's try it out. Yaay, it's working! Now let's cleanup `createCookie` a bit. Let's google our issue, here's a [good solution](https://stackoverflow.com/questions/54676966/push-method-in-react-hooks-usestate).
+8. Let's try it out. Yaay, it's working! Now let's cleanup `createCookie` a bit.
 
-9. So we can pass a method to `setCookies` and return a new array that has the de-structured array `_cookies` and `newCookies` added to it.
+9. So we can pass `setCookies` a de-structured array `_cookies` and `newCookie` added to it.
 
 ```javascript
 const createCookie = (newCookie) => {
-  setCookies((oldCookies) => [...oldCookies, newCookie]);
+  setCookies([..._cookies, newCookie]);
 };
 ```
 
