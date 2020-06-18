@@ -143,7 +143,54 @@ return (
 
 13. Our modal is ready! Let's add a form to it!
 
-## Step 3: Set Form
+## Step 3: Add Button Component
+
+Before adding our form, let's clean our code. Let's move the add button and modal into their own component.
+
+1. Create a new component in `buttons` called `AddButton`.
+
+```javascript
+import React from "react";
+
+const AddButton = () => {
+  return <div></div>;
+};
+
+export default AddButton;
+```
+
+2. Move the add button and modal to `AddButton` and wrap them with a fragment. Don't forget to move the imports as well.
+
+```jsx
+<>
+  <BsPlusCircle
+    className="float-right"
+    size="2em"
+    onClick={() => setIsOpen(true)}
+  />
+  <CookieModal isOpen={isOpen} closeModal={closeModal} />
+</>
+```
+
+3. Move the `isOpen` state and methods
+
+```javascript
+const [isOpen, setIsOpen] = useState(true);
+
+const closeModal = () => setIsOpen(false);
+
+const openModal = () => setIsOpen(true);
+```
+
+4. Now render `AddButton` in `CookieList`.
+
+```jsx
+<AddButton />
+```
+
+Wow! Much cleaner.
+
+## Step 4: Set Form
 
 To create a cookie form we need 4 fields, `name`, `description`, `price` and `image`.
 
@@ -314,7 +361,7 @@ const handleSubmit = (event) => {
 
 17. Let's try again. Yaay it's working!
 
-## Step 4: Creating a New Cookie
+## Step 5: Creating a New Cookie
 
 Now to create a new cookie, we need a method that will add this cookie to our `_cookies` state. So we will create a method that takes the new cookie as an argument add it to `_cookies` and pass this method as a prop down to our modal.
 
