@@ -67,11 +67,7 @@ const openModal = () => setIsOpen(true);
 5. Pass `openModal` to our create button's `onClick` that opens the modal for us:
 
 ```jsx
-<BsPlusCircle
-  className="float-right"
-  size="2em"
-  onClick={() => setIsOpen(true)}
-/>
+<BsPlusCircle className="float-right" size="2em" onClick={openModal} />
 ```
 
 6. Now let's create our modal component. Create a new folder called `modals` and a file called `CookieModal`. Setup your component:
@@ -120,7 +116,7 @@ return (
   isOpen={showModal}
   onRequestClose={closeModal}
   style={customStyles}
-  contentLabel="Example Modal"
+  contentLabel="Cookie Modal"
 >
   <h3>New Cookie</h3>
 </Modal>
@@ -163,11 +159,7 @@ export default AddButton;
 
 ```jsx
 <>
-  <BsPlusCircle
-    className="float-right"
-    size="2em"
-    onClick={() => setIsOpen(true)}
-  />
+  <BsPlusCircle className="float-right" size="2em" onClick={openModal} />
   <CookieModal isOpen={isOpen} closeModal={closeModal} />
 </>
 ```
@@ -418,19 +410,13 @@ const CookieModal = ({ isOpen, closeModal, createCookie }) => {
 ```javascript
 const handleSubmit = (event) => {
   event.preventDefault();
-  const newCookie = {
-    name,
-    price,
-    description,
-    image,
-  };
-  createCookie(newCookie);
+  createCookie(cookie);
 };
 ```
 
-8. Let's try it out. Yaay, it's working! Now let's cleanup `createCookie` a bit.
+1. Let's try it out. Nope, it's not working!
 
-9. So we can pass `setCookies` a de-structured array `_cookies` and `newCookie` added to it.
+2. So we can pass `setCookies` a de-structured array `_cookies` and `newCookie` added to it.
 
 ```javascript
 const createCookie = (newCookie) => {
@@ -441,3 +427,11 @@ const createCookie = (newCookie) => {
 10. Much cleaner! And let's try it out. Yes! It's working.
 
 11. But now, we want our modal to close automatically after creating a cookie. We can easily call `closeModal` in `handleSubmit`
+
+```javascript
+const handleSubmit = (event) => {
+  event.preventDefault();
+  createCookie(cookie);
+  closeModal();
+};
+```
