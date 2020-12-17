@@ -1,18 +1,19 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+// Redux Actions
+import { deleteCookie } from "../../store/actions";
 
 // Styling
 import { DeleteButtonStyled } from "../../styles";
 
-const DeleteButton = (props) => {
-  const history = useHistory();
-
-  const handleDelete = () => {
-    props.deleteCookie(props.cookieId);
-    history.push("/cookies");
-  };
-
-  return <DeleteButtonStyled onClick={handleDelete}>Delete</DeleteButtonStyled>;
+const DeleteButton = ({ cookieId }) => {
+  const dispatch = useDispatch();
+  return (
+    <DeleteButtonStyled onClick={() => dispatch(deleteCookie(cookieId))}>
+      Delete
+    </DeleteButtonStyled>
+  );
 };
 
 export default DeleteButton;
