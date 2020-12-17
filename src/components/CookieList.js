@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // Components
+import AddButton from "./buttons/AddButton";
 import CookieItem from "./CookieItem";
 import SearchBar from "./SearchBar";
 
@@ -21,6 +22,7 @@ const CookieList = () => {
     <div className="container">
       <SearchBar setQuery={setQuery} />
       <ListWrapper className="row">{cookieList}</ListWrapper>
+      <AddButton />
     </div>
   );
 };

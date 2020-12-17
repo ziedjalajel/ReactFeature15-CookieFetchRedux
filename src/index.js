@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 // Redux stuff
 import { createStore } from "redux";
 import { Provider } from "react-redux"; // STEP 2
-import reducer from "./store/reducers"; //STEP 3
+import reducer from "./store/reducer"; //STEP 3
 
 const store = createStore(
   reducer,
