@@ -1,18 +1,15 @@
-import React from "react";
+import { deleteProduct } from "../../store/actions";
 import { useDispatch } from "react-redux";
 
-// Redux Actions
-import { deleteCookie } from "../../store/actions";
-
-// Styling
-import { DeleteButtonStyled } from "../../styles";
-
-const DeleteButton = ({ cookieId }) => {
+const DeleteButton = ({ productId }) => {
   const dispatch = useDispatch();
   return (
-    <DeleteButtonStyled onClick={() => dispatch(deleteCookie(cookieId))}>
+    <button
+      className="btn btn-outline-danger"
+      onClick={() => dispatch(deleteProduct(productId))}
+    >
       Delete
-    </DeleteButtonStyled>
+    </button>
   );
 };
 

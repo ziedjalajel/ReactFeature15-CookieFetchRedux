@@ -1,15 +1,15 @@
-import React, { useState } from "react";
 import { Route, Switch } from "react-router";
-
-// Components
-import CookieDetail from "./components/CookieDetail";
-import CookieList from "./components/CookieList";
-import Home from "./components/Home";
-import NavBar from "./components/NavBar";
 
 // Styling
 import { GlobalStyle } from "./styles";
+import Home from "./components/Home";
+import NavBar from "./components/NavBar";
+// Components
+import ProductDetail from "./components/ProductDetail";
+import ProductForm from "./components/forms/ProductForm";
+import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
+import { useState } from "react";
 
 const theme = {
   light: {
@@ -40,11 +40,14 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/cookies/:cookieSlug">
-          <CookieDetail />
+        <Route path={["/products/new", "/products/:productSlug/edit"]}>
+          <ProductForm />
         </Route>
-        <Route path="/cookies">
-          <CookieList />
+        <Route path="/products/:productSlug">
+          <ProductDetail />
+        </Route>
+        <Route path="/products">
+          <ProductList />
         </Route>
       </Switch>
     </ThemeProvider>

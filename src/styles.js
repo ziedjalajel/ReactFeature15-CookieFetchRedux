@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 
-export const CookieWrapper = styled.div`
+export const ProductWrapper = styled.div`
   color: ${(props) => props.theme.mainColor};
   text-decoration: none;
   text-align: center;
@@ -12,11 +12,11 @@ export const CookieWrapper = styled.div`
   }
 
   p {
-    &.cookie-name {
+    &.product-name {
       color: ${(props) => props.theme.mainColor};
     }
 
-    &.cookie-price {
+    &.product-price {
       color: ${(props) => props.theme.pink};
     }
   }
