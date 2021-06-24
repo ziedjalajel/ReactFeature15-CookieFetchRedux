@@ -10,6 +10,8 @@ import ProductForm from "./components/forms/ProductForm";
 import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const theme = {
   light: {
@@ -27,6 +29,7 @@ const theme = {
 };
 
 function App() {
+  const dispatch = useDispatch();
   const [currentTheme, setCurrentTheme] = useState("light");
 
   const toggleTheme = () =>

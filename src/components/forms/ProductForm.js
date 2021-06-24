@@ -26,9 +26,14 @@ const ProductForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (foundProduct) dispatch(updateProduct(product));
-    else dispatch(addProduct(product));
+    if (foundProduct) {
+      console.log(product);
+      dispatch(updateProduct(product));
+    } else dispatch(addProduct(product));
     history.push("/products");
+  };
+  const handleImage = (event) => {
+    setProduct({ ...product, image: event.target.files[0] });
   };
 
   return (
@@ -67,9 +72,9 @@ const ProductForm = () => {
       <div className="mb-3">
         <label className="form-label">Image</label>
         <input
-          type="text"
-          value={product.image}
-          onChange={handleChange}
+          type="file"
+          // value={product.image}
+          onChange={handleImage}
           name="image"
           className="form-control"
         />
