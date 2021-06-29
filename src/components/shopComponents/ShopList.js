@@ -2,6 +2,7 @@ import Shop from "./Shop";
 import { useState } from "react";
 import SearchBar from "../SearchBar";
 import { useSelector } from "react-redux";
+import { ListWrapper } from "../../styles";
 
 const ShopsList = (props) => {
   const [query, setQuery] = useState("");
@@ -12,7 +13,7 @@ const ShopsList = (props) => {
   return (
     <div>
       <SearchBar setQuery={setQuery} />
-      <List>{shops}</List>
+      <ListWrapper>{shops}</ListWrapper>
     </div>
   );
 };

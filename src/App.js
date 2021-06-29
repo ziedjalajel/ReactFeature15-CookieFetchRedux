@@ -5,6 +5,8 @@ import { GlobalStyle } from "./styles";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 // Components
+import ShopDetails from "./components/shopComponents/ShopDetails";
+import ShopList from "./components/shopComponents/ShopList";
 import ProductDetail from "./components/ProductDetail";
 import ProductForm from "./components/forms/ProductForm";
 import ProductList from "./components/ProductList";
@@ -44,7 +46,7 @@ function App() {
           <ShopDetails />
         </Route>
         <Route path={"/shops"}>
-          <ShopsList />
+          <ShopList />
         </Route>
         <Route exact path="/">
           <Home />
