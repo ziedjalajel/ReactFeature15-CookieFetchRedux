@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const ProductList = () => {
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products.products);
 
   const [query, setQuery] = useState("");
 

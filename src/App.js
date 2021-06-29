@@ -40,6 +40,12 @@ function App() {
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
       <Switch>
+        <Route path={"/shops/:shopSlug"}>
+          <ShopDetails />
+        </Route>
+        <Route path={"/shops"}>
+          <ShopsList />
+        </Route>
         <Route exact path="/">
           <Home />
         </Route>

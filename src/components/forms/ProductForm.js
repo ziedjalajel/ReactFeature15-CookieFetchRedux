@@ -1,4 +1,4 @@
-import { addProduct, updateProduct } from "../../store/actions";
+import { addProduct, updateProduct } from "../../store/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 

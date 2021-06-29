@@ -1,10 +1,6 @@
 import axios from "axios";
 
-// ACTION TYPES
-export const ADD_PRODUCT = "ADD_PRODUCT";
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
-export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
-export const FETCH_PRODUCTS = "FETCH_PRODUCTS ";
+import * as actionTypes from "./types";
 
 // ACTIONS
 export const addProduct = (newProduct) => {
@@ -14,7 +10,7 @@ export const addProduct = (newProduct) => {
       for (const key in newProduct) formData.append(key, newProduct[key]);
       const res = await axios.post("http://localhost:8000/products", formData);
       dispatch({
-        type: ADD_PRODUCT,
+        type: actionTypes.ADD_PRODUCT,
         payload: { newProduct: res.data },
       });
     } catch (error) {
@@ -28,7 +24,7 @@ export const deleteProduct = (productId) => {
     try {
       await axios.delete(`http://localhost:8000/products/${productId}`);
       dispatch({
-        type: DELETE_PRODUCT,
+        type: actionTypes.DELETE_PRODUCT,
         payload: { productId: productId },
       });
     } catch (error) {
@@ -48,7 +44,7 @@ export const updateProduct = (updatedProduct) => {
         formData
       );
       dispatch({
-        type: UPDATE_PRODUCT,
+        type: actionTypes.UPDATE_PRODUCT,
         payload: { updatedProduct: res.data },
       });
     } catch (error) {
@@ -62,7 +58,7 @@ export const fetchProducts = () => {
       const res = await axios.get("http://localhost:8000/products");
       console.log(res.data);
       dispatch({
-        type: FETCH_PRODUCTS,
+        type: actionTypes.FETCH_PRODUCTS,
         payload: res.data,
       });
     } catch (error) {
