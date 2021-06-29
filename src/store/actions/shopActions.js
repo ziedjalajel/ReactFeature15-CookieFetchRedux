@@ -4,7 +4,7 @@ import * as actionTypes from "./types";
 export const shopsFetch = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get("http://localhost8000/shops");
+      const res = await axios.get("http://localhost:8000/shops");
       console.log(res.data);
       dispatch({
         type: actionTypes.FETCH_SHOPS,
