@@ -8,7 +8,10 @@ export const addProduct = (newProduct) => {
     try {
       const formData = new FormData();
       for (const key in newProduct) formData.append(key, newProduct[key]);
-      const res = await axios.post("http://localhost:8000/products", formData);
+      const res = await axios.post(
+        `http://localhost:8000/shops/${newProduct.shopId}/products`,
+        formData
+      );
       dispatch({
         type: actionTypes.ADD_PRODUCT,
         payload: { newProduct: res.data },

@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   products: [],
+  loading: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+        loading: false,
       };
     case actionTypes.DELETE_PRODUCT:
       return {

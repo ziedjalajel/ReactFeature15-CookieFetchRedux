@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   shops: [],
+  loading: true,
 };
 
 const shopReducer = (state = initialState, action) => {
@@ -10,6 +11,7 @@ const shopReducer = (state = initialState, action) => {
       return {
         ...state,
         shops: action.payload,
+        loading: false,
       };
     case actionTypes.ADD_SHOPS:
       const { newShop } = action.payload;

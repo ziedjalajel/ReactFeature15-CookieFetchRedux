@@ -3,17 +3,25 @@ import { useState } from "react";
 import SearchBar from "../SearchBar";
 import { useSelector } from "react-redux";
 import { ListWrapper } from "../../styles";
+import { BsPlusCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ShopsList = (props) => {
   const [query, setQuery] = useState("");
-  const shopsData = useSelector((state) => state.shops.shops);
-  let shops = shopsData
+
+  const shopList = useSelector((state) => state.shops.shops);
+  console.log(shopList);
+
+  let shops = shopList
     .filter((shop) => shop.name.toLowerCase().includes(query.toLowerCase()))
     .map((shop) => <Shop shop={shop} key={shop.id} />);
   return (
-    <div>
+    <div className="container">
       <SearchBar setQuery={setQuery} />
       <ListWrapper>{shops}</ListWrapper>
+      <Link to="/addshop">
+        <BsPlusCircle className="float-right" size="2em" />
+      </Link>
     </div>
   );
 };

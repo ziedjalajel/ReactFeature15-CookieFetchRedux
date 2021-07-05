@@ -3,17 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
 import { useState } from "react";
+import { ThemeConsumer } from "styled-components";
+import { shopsFetch } from "../../store/actions/shopActions";
 
 const ProductForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { shopSlug } = useParams();
+  const { shopId } = useParams();
   const { productSlug } = useParams();
   const foundProduct = useSelector((state) =>
-    state.products.find((product) => product.slug === productSlug)
+    state.products.products.find((product) => product.slug === productSlug)
   );
 
   const [product, setProduct] = useState(
     foundProduct ?? {
+      shopId: shopSlug,
       name: "",
       price: 0,
       description: "",
@@ -27,7 +32,6 @@ const ProductForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (foundProduct) {
-      console.log(product);
       dispatch(updateProduct(product));
     } else dispatch(addProduct(product));
     history.push("/products");

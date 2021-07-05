@@ -8,14 +8,12 @@ import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-const ProductList = () => {
-  const products = useSelector((state) => state.products.products);
-
+const ProductList = ({ products, shopId }) => {
   const [query, setQuery] = useState("");
 
   const productList = products
-    .filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
+    ?.filter((product) =>
+      product.name?.toLowerCase().includes(query.toLowerCase())
     )
     .map((product) => <ProductItem product={product} key={product.id} />);
 
@@ -23,7 +21,7 @@ const ProductList = () => {
     <div className="container">
       <SearchBar setQuery={setQuery} />
       <ListWrapper className="row">{productList}</ListWrapper>
-      <Link to="/products/new">
+      <Link to={`/shops/${shopId}/addproduct`}>
         <BsPlusCircle className="float-right" size="2em" />
       </Link>
     </div>

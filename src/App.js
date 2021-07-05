@@ -13,7 +13,10 @@ import ProductList from "./components/ProductList";
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ShopForm from "./components/forms/ShopForm";
+import BeatLoader from "react-spinners/BeatLoader";
+import SignupForm from "./components/signup/SignupForm";
 
 const theme = {
   light: {
@@ -30,37 +33,53 @@ const theme = {
   },
 };
 
-function App() {
+function App(props) {
   const dispatch = useDispatch();
   const [currentTheme, setCurrentTheme] = useState("light");
-
+  const products = useSelector((state) => state.products.products);
   const toggleTheme = () =>
     setCurrentTheme(currentTheme === "light" ? "dark" : "light");
-
+  const loadingProducts = useSelector((state) => state.products.loading);
+  const loadingShops = useSelector((state) => state.shops.loading);
   return (
     <ThemeProvider theme={theme[currentTheme]}>
       <GlobalStyle />
       <NavBar currentTheme={currentTheme} toggleTheme={toggleTheme} />
-      <Switch>
-        <Route path={"/shops/:shopSlug"}>
-          <ShopDetails />
-        </Route>
-        <Route path={"/shops"}>
-          <ShopList />
-        </Route>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path={["/products/new", "/products/:productSlug/edit"]}>
-          <ProductForm />
-        </Route>
-        <Route path="/products/:productSlug">
-          <ProductDetail />
-        </Route>
-        <Route path="/products">
-          <ProductList />
-        </Route>
-      </Switch>
+      {loadingShops || loadingProducts ? (
+        <BeatLoader size={10} />
+      ) : (
+        <Switch>
+          <Route
+            path={[
+              "/shops/:shopSlug/addproduct",
+              // "/products/:productSlug/edit",
+            ]}
+          >
+            <ProductForm />
+          </Route>
+          <Route path={"/shops/:shopSlug"}>
+            <ShopDetails />
+          </Route>
+          <Route path={"/shops"}>
+            <ShopList />
+          </Route>
+          <Route path="/addshop">
+            <ShopForm />
+          </Route>
+          <Route path="/signup">
+            <SignupForm />
+          </Route>
+          <Route path="/products/:productSlug">
+            <ProductDetail />
+          </Route>
+          <Route path="/products">
+            <ProductList products={products} />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+      )}
     </ThemeProvider>
   );
 }

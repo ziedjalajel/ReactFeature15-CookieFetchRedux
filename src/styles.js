@@ -81,7 +81,17 @@ export const NavStyled = styled.nav`
 export const NavItem = styled(NavLink)`
   color: ${(props) => props.theme.mainColor};
   padding: 0.25em 1em;
-
+  &.active {
+    color: ${(props) => props.theme.pink};
+  }
+`;
+export const NavShopItem = styled(NavLink)`
+  color: ${(props) => props.theme.mainColor};
+  padding: 0.25em 1em;
+  img {
+    width: 200px;
+    height: 200px;
+  }
   &.active {
     color: ${(props) => props.theme.pink};
   }

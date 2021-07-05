@@ -23,6 +23,13 @@ const NavBar = ({ currentTheme, toggleTheme }) => {
         <ThemeButton className="nav-item" onClick={toggleTheme}>
           {currentTheme === "light" ? "Dark" : "Light"} Mode
         </ThemeButton>
+        <NavItem
+          className="nav-item"
+          to="/signup"
+          style={{ padding: "0.25en 1en" }}
+        >
+          <ThemeButton className="nav-item">Signup</ThemeButton>
+        </NavItem>
       </div>
     </div>
   );
