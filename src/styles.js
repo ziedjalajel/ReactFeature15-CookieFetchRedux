@@ -96,7 +96,10 @@ export const NavShopItem = styled(NavLink)`
     color: ${(props) => props.theme.pink};
   }
 `;
-
+export const BtnColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 export const SearchBarStyled = styled.input`
   padding: 0.5rem;
   margin: 1rem auto;

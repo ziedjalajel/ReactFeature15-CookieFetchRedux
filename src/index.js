@@ -13,6 +13,7 @@ import thunk from "redux-thunk";
 import { fetchProducts } from "./store/actions/actions";
 import { shopsFetch } from "./store/actions/shopActions";
 import rootReducer from "./store/reducers/rootReducer";
+import { checkForToken } from "./store/actions/authAcyions";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -22,6 +23,7 @@ const store = createStore(
 
 store.dispatch(fetchProducts());
 store.dispatch(shopsFetch());
+store.dispatch(checkForToken());
 
 ReactDOM.render(
   <React.StrictMode>

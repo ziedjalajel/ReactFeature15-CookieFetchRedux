@@ -4,9 +4,12 @@ import SearchBar from "../SearchBar";
 import { useSelector } from "react-redux";
 import { ListWrapper } from "../../styles";
 import { BsPlusCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const ShopsList = (props) => {
+  const user = useSelector((state) => state.user.user);
+  const history = useHistory();
+  if (!user) history.push("/");
   const [query, setQuery] = useState("");
 
   const shopList = useSelector((state) => state.shops.shops);

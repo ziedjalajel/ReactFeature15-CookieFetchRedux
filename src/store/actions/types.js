@@ -7,3 +7,6 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 //shop actions
 export const FETCH_SHOPS = "FETCH_SHOPS";
 export const ADD_SHOPS = "ADD_SHOPS";
+
+//signin actions
+export const SET_USER = "SET_USER";

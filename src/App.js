@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShopForm from "./components/forms/ShopForm";
 import BeatLoader from "react-spinners/BeatLoader";
 import SignupForm from "./components/signup/SignupForm";
+import SigninForm from "./components/signin/signinForm";
 
 const theme = {
   light: {
@@ -66,9 +67,13 @@ function App(props) {
           <Route path="/addshop">
             <ShopForm />
           </Route>
+          <Route path="/signin">
+            <SigninForm />
+          </Route>
           <Route path="/signup">
             <SignupForm />
           </Route>
+
           <Route path="/products/:productSlug">
             <ProductDetail />
           </Route>

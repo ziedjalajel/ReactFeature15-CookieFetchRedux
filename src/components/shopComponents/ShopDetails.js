@@ -26,7 +26,7 @@ const ShopDetails = () => {
             </button>
           </Link>
         </DetailWrapper>
-        <ProductList product={listOfProducts} shopId={shop.id} />
+        <ProductList products={listOfProducts} shopId={shop.id} />
       </div>
     </div>
   );
